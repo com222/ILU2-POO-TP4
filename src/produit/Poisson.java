@@ -9,8 +9,10 @@ public class Poisson extends Produit{
 	}
 
 	@Override
-	public void decrireProduit() {
-		System.out.println("poisson peche " + datePeche);
+	public String decrireProduit() {
+		StringBuilder stringBuilder = new StringBuilder(); 
+		stringBuilder.append("poisson peche ").append(datePeche);
+		return stringBuilder.toString(); 
 		
 	}
 

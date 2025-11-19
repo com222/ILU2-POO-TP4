@@ -13,9 +13,16 @@ public class Sanglier extends Produit{
 	}
 
 	@Override
-	public void decrireProduit() {
-		System.out.println("sanglier de " + poids + unite.toString() + " chasse par " + chasseur.getNom());
-		
+	public String decrireProduit() {
+		StringBuilder stringBuilder = new StringBuilder(); 
+		stringBuilder.append("sanglier de ").append(poids);
+		stringBuilder.append(unite.toString()).append(" chasse par ").append(chasseur.getNom());
+		return stringBuilder.toString(); 
+	}
+	
+	@Override 
+	public int calculerPrix(int prix) {
+		return (prix * poids) / 1000;
 	}
 
 }

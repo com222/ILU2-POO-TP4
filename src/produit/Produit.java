@@ -1,6 +1,6 @@
 package produit;
 
-public abstract class Produit {
+public abstract class Produit implements IProduit{
 	private String nom;
 	protected Unite unite;
 
@@ -13,6 +13,9 @@ public abstract class Produit {
 		return nom;
 	}
 	
-	public abstract void decrireProduit();
+	
+	public int calculerPrix(int prix) {
+		return prix; 
+	}
 
 }
