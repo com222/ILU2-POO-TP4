@@ -4,7 +4,6 @@ import villagegaulois.Etal;
 import villagegaulois.IEtal;
 import personnages.Gaulois;
 import produit.Poisson;
-import produit.Produit;
 import produit.Sanglier;
 
 public class ScenarioTest {

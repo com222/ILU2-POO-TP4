@@ -2,12 +2,10 @@ package villagegaulois;
 
 import personnages.Gaulois;
 import produit.IProduit;
-import produit.Produit;
 
 public class Etal <P extends IProduit> implements IEtal {
 	private Gaulois vendeur;
 	private P[] produits;
-	private int quantiteDebutMarche;
 	private int quantite;
 	private boolean etalOccupe = false;
 	private int prix;
@@ -25,8 +23,8 @@ public class Etal <P extends IProduit> implements IEtal {
 		return quantite;
 	}
 	
-	public Boolean installerVendeur(Gaulois vendeur, P[] produit, int prix) {
-		nbProduit = quantiteDebutMarche = produit.length;
+	public boolean installerVendeur(Gaulois vendeur, P[] produit, int prix) {
+		nbProduit = produit.length;
 		this.prix = prix; 
 		this.vendeur = vendeur;
 		produits = produit; 

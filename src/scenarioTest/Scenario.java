@@ -11,18 +11,47 @@ import villagegaulois.IVillage;
 public class Scenario {
 
 	public static void main(String[] args) {
-
 		IVillage village = new IVillage() {
+			private final int NB_MAX_ETAL = 10;
+			private IEtal[] marche = new IEtal[NB_MAX_ETAL];
+			private int nbrEtal = 0;
+
 			@Override
 			public <P extends Produit> boolean installerVendeur(Etal<P> etal, Gaulois vendeur, P[] produit, int prix) {
-				return etal.installerVendeur(vendeur, produit, prix);
+				if (nbrEtal < NB_MAX_ETAL -1) {
+					return false;
+				} else {
+					marche[nbrEtal] = etal;
+					nbrEtal++;
+					return etal.installerVendeur(vendeur, produit, prix);
+				}
 			}
 
 			@Override
 			public void acheterProduit(String produit, int quantiteSouhaitee) {
-				// TODO Auto-generated method stub
-				
+				int quantiteRestante = quantiteSouhaitee;
+				for (int i = 0; i < nbrEtal && quantiteRestante != 0; i++) {
+					IEtal etal = marche[i];
+					int quantiteDisponible = etal.contientProduit(produit, quantiteRestante);
+					if (quantiteDisponible != 0) {
+						int prix = etal.acheterProduit(quantiteDisponible);
+						System.out.println("A l'étal n° " + (i + 1) + ", j'achete " + quantiteDisponible + " "
+								+ produit + " et je paye " + prix + " sous.");
+						quantiteRestante -= quantiteDisponible;
+					}
+				}
+				System.out.println("Je voulais " + quantiteSouhaitee + " " + produit + ", j'en ai acheté "
+						+ (quantiteSouhaitee - quantiteRestante) + ".\n");
 			}
+
+			public String toString() {
+				StringBuilder stringBuilder = new StringBuilder();
+				for (int i = 0; i < nbrEtal; i++) {
+					stringBuilder.append(marche[i].etatEtal()).append("\n");
+				}
+				return stringBuilder.toString();
+			}
+
 		};
 
 		Gaulois ordralfabetix = new Gaulois("Ordralfabétix", 9);
